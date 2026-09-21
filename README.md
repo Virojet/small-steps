@@ -1,53 +1,70 @@
-# Small Steps
+<p align="center">
+  <img src="app-icon.png" width="112" alt="Small Steps logo">
+</p>
 
-A Windows and macOS desktop habit tracker inspired by Atomic Habits, with OpenAI coaching. Existing AI settings migrate to OpenAI while preserving habits and conversation history.
+<h1 align="center">Small Steps</h1>
 
-## Connect OpenAI
+<p align="center">
+  A calm desktop habit tracker with private, optional AI coaching.
+</p>
 
-1. Open https://platform.openai.com/api-keys and create a project API key named Small Steps.
-2. Check your API credit and billing at https://platform.openai.com/settings/organization/billing/overview.
-3. Open Small Steps → Settings, then paste your OpenAI API key. The coach uses `gpt-5-mini`.
-4. Click **Save & test connection**. This sends only a small test message, without habits or conversation history. Normal API charges apply.
-5. Once connected, close Settings and talk to your coach.
+<p align="center">
+  <a href="https://github.com/Virojet/small-steps/releases/latest/download/Small-Steps-Setup-1.0.0.exe"><strong>Download for Windows</strong></a>
+  ·
+  <a href="https://github.com/Virojet/small-steps/releases/latest">View latest release</a>
+</p>
 
-The OpenAI connection uses the Responses API. Keys are encrypted on this Windows account, never displayed after saving, and excluded from backups. Responses use `store: false`; this does not override OpenAI's applicable API data policies. The coach sends habit context and recent conversation when you chat. A key from another provider does not work with OpenAI.
+## Install in three steps
 
-Reference: https://developers.openai.com/api/docs/quickstart and https://developers.openai.com/api/docs/guides/text.
+1. Download **Small-Steps-Setup-1.0.0.exe** using the button above.
+2. Open the downloaded file and follow the installer.
+3. Launch **Small Steps** from the Desktop or Start menu.
 
-## Run
+The installer includes shortcuts and an uninstaller. Your habits stay on your computer. An OpenAI API key is only needed if you want to use the optional coach.
 
-Open `dist/Small Steps/Small Steps.exe` or use the Desktop shortcut. No browser or separate server is needed.
+> Windows may show a SmartScreen notice because this independent app is not code-signed. If you trust this repository, choose **More info → Run anyway**.
 
-## Share on Windows
+## What you get
 
-Give friends `release/Small-Steps-Setup-1.0.0.exe`. The installer creates Start Menu and Desktop shortcuts and includes an uninstaller. Each person enters their own OpenAI API key in Settings or the Coach panel; API keys are never included in the installer.
+- Daily habits with full and tiny-step check-ins
+- Current and previous week navigation, search, filters, and undo
+- Two-minute focus timer with pause, resume, and minimized mode
+- Reflection journal with moods and private daily notes
+- 7, 30, and 90-day progress views
+- Customizable starter templates
+- Local JSON backups and restore
+- Optional GPT-5 Mini habit coaching using your own OpenAI API key
 
-For development, install Node.js and pnpm, run `pnpm install`, `node node_modules/electron/install.js` if needed, then `pnpm start`. Run `pnpm test` for calendar and validation tests; `pnpm package` creates a portable Windows folder, while `pnpm dist` creates the Windows installer.
+## Optional: connect the coach
 
-## Share on macOS
+1. Create an API key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+2. In Small Steps, open **Settings** and paste the key.
+3. Choose **Save & test connection**.
 
-Run `pnpm dist:mac` on a Mac to create a universal DMG and ZIP for both Apple Silicon and Intel Macs. The included GitHub Actions workflow can build the same files on a macOS runner after the project is pushed to GitHub.
+The key is encrypted for your Windows account, excluded from backups, and never included in the installer. Coach requests use the OpenAI Responses API with `store: false`. Habit tracking, journaling, and backups work without an API key.
 
-For a release friends can open without a Gatekeeper warning, add an Apple Developer `Developer ID Application` certificate and notarization credentials as the workflow's `CSC_LINK`, `CSC_KEY_PASSWORD`, `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD`, and `APPLE_TEAM_ID` secrets. Each person still enters their own OpenAI API key after installation.
+## For developers
 
-## Features
+Requirements: Node.js and pnpm.
 
-- Dark charcoal interface with original steps branding, mint accents, motion, and reduced-motion support.
-- Search and filter today's habits, browse previous weeks, and undo a check-in.
-- Ctrl K command palette, N for a new habit, T for Today, and Ctrl / for the coach.
-- Two-minute focus timer with pause, resume, reset, minimize, and explicit tiny-step completion. Timer sessions last until the app closes.
-- Six customizable habit templates, 7/30/90-day progress charts, and clickable history cells.
-- Local reflection journal with mood and daily notes; entries are included in backups and not sent to AI.
-- Collapsible coach panel, habit-specific prompt drafts, and response copying.
+```powershell
+pnpm install
+pnpm start
+```
 
-Design references and decisions are documented in [DESIGN.md](DESIGN.md). UI checks: `node scripts/design-smoke.cjs` (uses an isolated test profile).
+Useful commands:
 
-- Identity goal, habit stacking cue, two-minute version, reward, and daily schedule.
-- Full or tiny-step check-ins, current-week backfill, streaks, eight-week history, and recovery prompts.
-- Habit creation, editing, deletion, and JSON backups with restore confirmation.
-- AI habit coach powered by the user's own OpenAI API key and GPT-5 Mini.
-- Offline tracking. JSON data in Electron's userData folder. API keys are encrypted with the operating system's secure storage, isolated from the renderer and excluded from backups and packaged files.
+| Command | Purpose |
+| --- | --- |
+| `pnpm test` | Run the automated test suite |
+| `pnpm package` | Create a portable Windows build |
+| `pnpm dist` | Build the Windows installer |
+| `pnpm dist:mac` | Build universal macOS DMG and ZIP files on macOS |
 
-The app starts with no fabricated history. Add a habit or choose a starter. In Settings, paste your own OpenAI API key. Chat sends messages and habit context to OpenAI; all other tracking is local. Back up your progress from Settings.
+Design notes are in [DESIGN.md](DESIGN.md). Each installation uses its own local data and API key.
 
-Reference: https://jamesclear.com/habit-tracker and https://jamesclear.com/habit-stacking. Independent app; not affiliated with James Clear.
+## Privacy
+
+Habit data and journal entries are stored locally in Electron's user-data folder. Only coach conversations and relevant habit context are sent to OpenAI when you use the coach. API keys are isolated from the renderer and excluded from backups and packaged files.
+
+Small Steps is an independent app inspired by evidence-based habit-building ideas. It is not affiliated with James Clear or OpenAI.
