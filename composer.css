@@ -1,0 +1,68 @@
+.composer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.composer-bar > span {
+  color: #adb4a9;
+  font-size: 8px;
+}
+
+.composer-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.model-picker {
+  display: flex;
+  align-items: center;
+  max-width: 170px;
+  height: 28px;
+  padding-left: 7px;
+  color: #657b6b;
+  background: #f7f9f6;
+  border: 1px solid #e1e7df;
+  border-radius: 7px;
+}
+
+.model-picker:hover {
+  background: #f0f5ef;
+  border-color: #cfdbd0;
+}
+
+.model-spark {
+  margin-right: 2px;
+  color: #6e967d;
+  font-size: 9px;
+}
+
+.model-picker select {
+  min-width: 0;
+  max-width: 138px;
+  padding: 0 3px;
+  overflow: hidden;
+  color: #52695a;
+  font-size: 9px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.model-picker select:disabled { cursor: wait; }
+.model-picker:has(select:focus-visible) { outline: 3px solid #83b4a0; outline-offset: 2px; }
+.model-picker select:focus-visible { outline: 0; }
+#send { flex: 0 0 auto; }
+#chat-form:focus-within { border-color: #97b4a2; box-shadow: 0 0 0 3px #5d8f7112; }
+
+@media (max-width: 1150px) {
+  .composer-bar > span { display: none; }
+  .model-picker { max-width: 190px; }
+  .model-picker select { max-width: 155px; }
+}

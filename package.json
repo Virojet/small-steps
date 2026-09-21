@@ -1,0 +1,87 @@
+{
+  "name": "small-steps",
+  "productName": "Small Steps",
+  "version": "1.0.0",
+  "description": "A thoughtful habit tracker with OpenAI coaching",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "package": "node scripts/package.cjs",
+    "dist": "node scripts/dist.cjs",
+    "dist:mac": "node scripts/dist-mac.cjs"
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "^26.15.3"
+  },
+  "license": "UNLICENSED",
+  "build": {
+    "appId": "com.smallsteps.habittracker",
+    "productName": "Small Steps",
+    "directories": {
+      "output": "release"
+    },
+    "artifactName": "Small-Steps-Setup-${version}.${ext}",
+    "files": [
+      "package.json",
+      "main.cjs",
+      "preload.cjs",
+      "core.cjs",
+      "openai.cjs",
+      "index.html",
+      "renderer.js",
+      "style.css",
+      "composer.css",
+      "design.css",
+      "refinement.css",
+      "experience.css",
+      "experience.js",
+      "coach-protocol.js",
+      "chat-store.js",
+      "conversations.js",
+      "coach-habits.js",
+      "brand.svg",
+      "app-icon.ico",
+      "app-icon.png"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "app-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Small Steps",
+      "deleteAppDataOnUninstall": false
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "artifactName": "Small-Steps-${version}-mac-${arch}.${ext}"
+    }
+  }
+}
