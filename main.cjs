@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain,safeStorage,dialog,session,shell}=require('electron');
+const {app,BrowserWindow,ipcMain,safeStorage,dialog,session,shell,clipboard}=require('electron');
 const fs=require('node:fs'); const path=require('node:path'); const {pathToFileURL}=require('node:url');
 const {initialState,validateState}=require('./core.cjs');
 const {migrateToOpenAI}=require('./core.cjs');
@@ -84,6 +84,7 @@ app.whenReady().then(async()=>{
  handle('hasKey',()=>Boolean(getKey()));
  handle('testOpenAI',async()=>{const s=migrateToOpenAI(readState());if(busy)throw Error('Wait for the current reply before testing.');busy=true;try{await callOpenAI([{role:'user',text:'Reply with: Connected.'}],s.model,getKey(),'This is a connection test. Respond in a single short sentence.');return {model:s.model};}finally{busy=false;}});
  handle('openExternal',async url=>{if(typeof url==='string'&&(url.startsWith('https://')||url.startsWith('http://'))){await shell.openExternal(url);return true;}return false;});
+ handle('copyText',text=>{if(typeof text!=='string'||text.length>20000)throw Error('Invalid text to copy.');clipboard.writeText(text);return true;});
  handle('chat',async (messages,attachment)=>{if(busy)throw Error('A response is already on its way.');if(!Array.isArray(messages)||!messages.length||messages.length>40||messages.some(m=>!['user','model'].includes(m.role)||typeof m.text!=='string'||m.text.length>20000))throw Error('Invalid conversation.');busy=true;try{return await callAI(messages,readState(),attachment);}finally{busy=false;}});
  handle('export',async()=>{const r=await dialog.showSaveDialog(win,{defaultPath:'small-steps-backup.json',filters:[{name:'JSON backup',extensions:['json']}]});if(r.canceled)return false;writeAtomic(r.filePath,JSON.stringify(readState(),null,2));return true;});
  handle('import',async()=>{const r=await dialog.showOpenDialog(win,{filters:[{name:'JSON backup',extensions:['json']}],properties:['openFile']});if(r.canceled)return null;const s=migrateToOpenAI(validateState(JSON.parse(fs.readFileSync(r.filePaths[0],'utf8'))));const answer=await dialog.showMessageBox(win,{type:'question',buttons:['Cancel','Restore backup'],defaultId:0,message:'Replace current habits and chat with this backup?'});if(answer.response!==1)return null;writeAtomic(file()+'.backup',JSON.stringify(readState()));writeAtomic(file(),JSON.stringify(s,null,2));return s;});

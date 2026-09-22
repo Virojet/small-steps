@@ -9,14 +9,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Virojet/small-steps/releases/latest/download/Small-Steps-Setup-1.0.0.exe"><strong>Download for Windows</strong></a>
+  <a href="https://github.com/Virojet/small-steps/releases/latest/download/Small-Steps-Setup-1.0.1.exe"><strong>Download for Windows</strong></a>
   ·
   <a href="https://github.com/Virojet/small-steps/releases/latest">View latest release</a>
 </p>
 
 ## Install in three steps
 
-1. Download **Small-Steps-Setup-1.0.0.exe** using the button above.
+1. Download **Small-Steps-Setup-1.0.1.exe** using the button above.
 2. Open the downloaded file and follow the installer.
 3. Launch **Small Steps** from the Desktop or Start menu.
 

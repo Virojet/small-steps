@@ -249,7 +249,7 @@ function messageHtml(message){
 renderChat=function(){
  const chat=$('#chat');chat.innerHTML=state.messages.map((m,i)=>`<div class="message ${m.role==='user'?'user':''}">${messageHtml(m)}</div>${m.role==='model'?`<div class="message-tools"><button data-copy="${i}" aria-label="Copy coach response">${ico('copy')} Copy</button></div>`:''}`).join('');
  document.querySelectorAll('.inline-emoji').forEach(button=>button.onclick=()=>composerEmoji(button.dataset.emoji));
- document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(state.messages[Number(b.dataset.copy)].text.replace(/```habit[\s\S]*?(?:```|$)/g,'').trim());toast('Response copied.');}catch{toast('Copy is unavailable. Select the response text to copy it.');}});chat.scrollTop=chat.scrollHeight;
+ document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{try{await api.copyText(state.messages[Number(b.dataset.copy)].text.replace(/```habit[\s\S]*?(?:```|$)/g,'').trim());toast('Response copied.');}catch{toast('Copy is unavailable. Select the response text to copy it.');}});chat.scrollTop=chat.scrollHeight;
 };
 hydrateIcons();$('.brand-dot').textContent='.';
 if($('.brand'))$('.brand').onclick=e=>{e.preventDefault();go('today');};
