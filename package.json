@@ -1,7 +1,7 @@
 {
   "name": "small-steps",
   "productName": "Small Steps",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A thoughtful habit tracker with OpenAI coaching",
   "main": "main.cjs",
   "scripts": {

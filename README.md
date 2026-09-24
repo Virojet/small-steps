@@ -9,20 +9,32 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Virojet/small-steps/releases/latest/download/Small-Steps-Setup-1.0.1.exe"><strong>Download for Windows</strong></a>
+  <a href="https://github.com/Virojet/small-steps/releases/latest/download/Small-Steps-Setup-1.0.2.exe"><strong>Download for Windows</strong></a>
+  ·
+  <a href="https://github.com/Virojet/small-steps/releases/latest/download/Small-Steps-1.0.2-mac-universal.dmg"><strong>Download for macOS</strong></a>
   ·
   <a href="https://github.com/Virojet/small-steps/releases/latest">View latest release</a>
 </p>
 
-## Install in three steps
+## Install on Windows
 
-1. Download **Small-Steps-Setup-1.0.1.exe** using the button above.
+1. Download **Small-Steps-Setup-1.0.2.exe** using the button above.
 2. Open the downloaded file and follow the installer.
 3. Launch **Small Steps** from the Desktop or Start menu.
 
 The installer includes shortcuts and an uninstaller. Your habits stay on your computer. An OpenAI API key is only needed if you want to use the optional coach.
 
 > Windows may show a SmartScreen notice because this independent app is not code-signed. If you trust this repository, choose **More info → Run anyway**.
+
+## Install on macOS
+
+1. Download **Small-Steps-1.0.2-mac-universal.dmg** using the button above.
+2. Open the DMG and drag **Small Steps** into Applications.
+3. Open **Small Steps** from Applications.
+
+The universal installer supports both Apple silicon and Intel Macs.
+
+> macOS may block the first launch because this independent app is not notarized. If you trust this repository, Control-click the app, choose **Open**, then confirm **Open**.
 
 ## What you get
 
