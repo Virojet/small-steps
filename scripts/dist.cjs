@@ -10,7 +10,7 @@ const release=path.join(root,'release');
 const builder=path.join(root,'node_modules','electron-builder','out','cli','cli.js');
 
 try{
- const result=spawnSync(process.execPath,[builder,'--win','nsis',`--config.directories.output=${output}`],{cwd:root,stdio:'inherit'});
+ const result=spawnSync(process.execPath,[builder,'--win','nsis','--publish','never',`--config.directories.output=${output}`],{cwd:root,stdio:'inherit'});
  if(result.error)throw result.error;
  if(result.status!==0)process.exitCode=result.status||1;
  else{

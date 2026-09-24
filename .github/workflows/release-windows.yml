@@ -1,0 +1,52 @@
+name: Publish Windows installer
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build installer
+        run: pnpm dist
+
+      - name: Create release and upload installer
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = (Get-Content -LiteralPath "package.json" | ConvertFrom-Json).version
+          $expectedTag = "v$version"
+          if ($env:GITHUB_REF_NAME -ne $expectedTag) {
+            throw "Tag $env:GITHUB_REF_NAME does not match package version $version."
+          }
+
+          $installer = "release/Small-Steps-Setup-$version.exe"
+          if (-not (Test-Path -LiteralPath $installer)) {
+            throw "Installer was not created at $installer."
+          }
+
+          gh release create $env:GITHUB_REF_NAME $installer --repo $env:GITHUB_REPOSITORY --title "Small Steps $version" --generate-notes
